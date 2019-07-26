@@ -55,7 +55,7 @@ df_clean_two = pd.concat([df_clean_one, categories_clean],join='inner', axis=1)
 # drop duplicates
 df_clean_two['message'] = df_clean_two['message'].drop_duplicates()
 
-#Save the clean dataset into an sqlite database.
+#save the clean dataset into an sqlite database.
 engine = create_engine('sqlite:///disaster-data.db')
 df_clean_two.to_sql('messages', engine, index=False)
 
