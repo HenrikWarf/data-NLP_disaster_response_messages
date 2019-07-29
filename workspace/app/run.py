@@ -56,6 +56,7 @@ def index():
 
             'layout': {
                 'title': 'Distribution of Message Genres',
+                'width': 600,
                 'yaxis': {
                     'title': "Count"
                 },

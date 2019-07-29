@@ -2,22 +2,24 @@
 {% block title %}Results{% endblock %}
 
 {% block message %}
-    <h3 class="text-center">MESSAGE</h3>
-    <p class="text-center" style="font-size: 18px"><i>{{query}}</i></p>
+    <h3 class="text-center" style="color: grey; padding: 20px;">MESSAGE</h3>
+    <p class="text-center" style="font-size: 32px; padding: 20px;"><i>" {{query}}"</i></p>
 {% endblock %}
 
 {% block content %}
-    <h1 class="text-center">Result</h1>
-        <ul class="list-group">
-            {% for category, classification in classification_result.items() %}
-                {% if classification == 1 %}
-                    <li class="list-group-item list-group-item-success text-center">{{category.replace('_', ' ').title()}}</li>
-                {% else %}
-                    <li class="list-group-item list-group-item-dark text-center">{{category.replace('_', ' ').title()}}</li>
-                {% endif %}
-            {% endfor %}
-
-        </div>
+    <div>
+            <div>
+                <h1 class="text-center" style="color: grey;">Result</h1>
+            </div>
+            <div class="display-classes">
+                {% for category, classification in classification_result.items() %}
+                    {% if classification == 1 %}
+                        <div class="box-classified">{{category.replace('_', ' ').title()}}</div>
+                    {% else %}
+                        <div class="box-not-classified">{{category.replace('_', ' ').title()}}</div>
+                    {% endif %}
+                {% endfor %}
+            </div>
     </div>
 
 {% endblock %}
