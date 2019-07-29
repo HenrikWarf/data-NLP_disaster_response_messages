@@ -9,13 +9,16 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"> 
+     <!-- <link rel="stylesheet" href="./static/css/styles.css">  -->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 
 <body>
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-trans navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="/">Disaster Response Project</a>
@@ -32,24 +35,35 @@
 
 <div class="jumbotron">
     <div class="container">
-        <h1 class="text-center">Disaster Response Project</h1>
-        <p class="text-center">Analyzing message data for disaster response</p>
+        <h1 class="text-center link-red">Disaster Response Project</h1>
+        <p class="text-center">- Analyzing message data for disaster response -</p>
         <hr />
       
         <div class="row">
-            <div class="col-lg-12 form-group-lg">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8 form-group-lg">
                 <form action="/go" method="get">
-                    <input type="text" class="form-control form-control-lg" name="query" placeholder="Enter a message to classify">
-                    <div class="col-lg-offset-5">
-                        <button type="submit" class="btn btn-lg btn-success">Classify Message</button>
+                    <input type="text" class="form-control form-control-lg" name="query" 
+                    placeholder="Enter a message to classify" 
+                    onfocus="this.placeholder = ''"
+                    onblur="this.placeholder = 'Enter a message to classify'">
+                    
+                    <br>
+                    <div class="col-lg-offset-5" id="button-div">
+                        <button type="submit" class="button">Classify Message</button>
                     </div>
                 </form>
             </div>
+            <div class="col-lg-2"></div>
         </div>
 
+        
+    </div>
+</div>
+
+<div>
         {% block message %}
         {% endblock %}
-    </div>
 </div>
 
 <div class="container">

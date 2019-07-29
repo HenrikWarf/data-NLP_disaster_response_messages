@@ -1,0 +1,66 @@
+body {
+    font-family: sans-serif, Arial,  Helvetica;
+}
+
+.navbar-brand {
+    color: white;
+}
+
+.navbar-brand:hover {
+    color: white;
+    /* border-bottom: 1px solid white; */
+}
+
+.navbar-nav li a {
+    color: white;
+}
+
+.navbar-nav li a:hover {
+    color: white;
+    background-color: transparent;
+    border-bottom: 1px solid white;
+}
+
+
+
+.jumbotron {
+    /* padding-top: 100px ; */
+    padding-top: 10%;
+    padding-bottom: 10%;
+    background-image: url('../images/background5.jpg') ;
+    background-repeat: no-repeat; 
+    /* height: 100%; */
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    color: white;
+    margin-bottom: 0px;
+}
+
+.jumbotron h1 {
+    font-weight: 300;
+    text-shadow: 3px 2px black;
+}
+
+#button-div {
+    margin-top: 20px;
+}
+
+.button {
+    padding: 20px 20px;
+    color: white;
+    background-color: #F45B69;
+    font-size: 18px;
+    border: 0;
+}
+
+.button:hover {
+    transition: 0.3s;
+    /* box-shadow: 8px 8px 5px lightgrey; */
+    background-color: #E0535E;
+}
+
+input {
+    outline: none ;
+}
