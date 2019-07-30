@@ -5,13 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Disasters</title>
+    <title>Disaster Response Project</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
      <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"> 
-     <!-- <link rel="stylesheet" href="./static/css/styles.css">  -->
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
      <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
@@ -31,7 +30,7 @@
                     <div id="navbar" class="collapse navbar-collapse">
                         <ul class="nav navbar-nav">
                             <li><a href="https://www.udacity.com/">Made with Udacity</a></li>
-                            <li><a href="https://github.com/">Contact</a></li>
+                            <li><a href="https://github.com/henrikwarf">Contact</a></li>
                         </ul>
                     </div>
                 </div>
@@ -75,33 +74,50 @@
    
             <h1 class="text-center ">Project description</h1>
             <p class="text-description">
-                This project is focusing on building a solution and model to help classify text messages related 
-                to and following real-world disaster scenarios. Typically after a larger disaster thousands or
-                even millions of messages are being send out. This is also the time when the disaster response organisations
-                have the least capacity to filter and handle the messages that are the most important as well
-                as relevant for those specific organisations. 
+                The goal of this project is to build a solution that can classify text messages related 
+                to real-world disaster scenarios. 
+                <br><br>
+                In the case of a larger disaster thousands or even millions of messages are sent out 
+                in the form of social media messages, direct messages and news messages from 
+                different sources. Unfortunatly it is also at this time the disaster response organisations
+                have the least capacity to filter, handle and acto on these messages. 
+                <br><br>
+                With the use of machine learning technology we can build a solution to 
+                classify text messages automatically. This could help to 
+                structure insights from these messages in a better way and in turn shift
+                resources to where it is absolutely needed following a disaster. 
             </p>
             <p class="text-description">
-                The data that we are working with 
-                are within the genres: direct, news or social media messages and comes from several 
-                different disasters and has been labeled and captured by Figure Eight. 
+                The data used to make this possible are labeled direct messages, news messages and 
+                social media messages and comes from several different real world disasters and 
+                has been captured by Figure Eight. 
             </p>
             
     </div>
 
     <div class="page-header">
-            <h1 class="text-center">Overview of Training Dataset</h1>
+            <h1 class="text-center">Overview of Dataset</h1>
     </div>
-    {% endblock %}
+        {% endblock %}
 
-    {% for id in ids %}
-        <div id="{{id}}"></div>
-    {% endfor %}
+        {% for id in ids %}
+        <div class="text-center" id="{{id}}" style="width:600px; margin:0 auto;">     
+        </div>
+        
+        {% endfor %}
+        {% block datapoints %}
+        <div style="margin-top: 100px;">
+            <h3 class="text-center" style="color: grey;">Number of total data points:</h3>
+            <p class="text-center" style="font-size: 48px;">{{ number_of_data_points }}</p>
+        </div>
+        {% endblock %}
 </div>
 
 <footer>
     <div class="container">
-            <p class="text-center" style="font-size: 24px; font-weight: 300;">Created by: <i>The Crazy Hippo</i></p>
+            <p class="text-center" style="font-size: 24px; font-weight: 300;">
+                <b>Created by:</b> <i>The Crazy Hippo</i>
+            </p>
     </div>
 </footer>
 

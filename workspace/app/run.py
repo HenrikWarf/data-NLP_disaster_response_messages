@@ -39,12 +39,19 @@ model = joblib.load("../models/disaster_model.pkl")
 def index():
     
     # extract data needed for visuals
-    # TODO: Below is an example - modify to extract data for your own visuals
+    # TODO
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
+    number_of_data_points = len(df)
+
+    # Graph number 2
+    df_y_data = df.iloc[:,4:]
+    sum_of_data = df_y_data.sum().sort_values(ascending=False)
+    labels = list(sum_of_data.index)
+    label_count = list(sum_of_data.values)
     
     # create visuals
-    # TODO: Below is an example - modify to create your own visuals
+    # TODO
     graphs = [
         {
             'data': [
@@ -64,6 +71,26 @@ def index():
                     'title': "Genre"
                 }
             }
+        }, 
+        {
+             'data': [
+                Bar(
+                    x=labels,
+                    y=label_count
+                )
+            ],
+
+            'layout': {
+                'title': 'Distribution of Message per Label',
+                'width': 800,
+                'yaxis': {
+                    'title': "Count"
+                },
+                'xaxis': {
+                    'title': "Label"
+                }
+            }
+
         }
     ]
     
@@ -72,7 +99,11 @@ def index():
     graphJSON = json.dumps(graphs, cls=plotly.utils.PlotlyJSONEncoder)
     
     # render web page with plotly graphs
-    return render_template('master.html', ids=ids, graphJSON=graphJSON)
+    return render_template('master.html', 
+        ids=ids, 
+        graphJSON=graphJSON,
+        number_of_data_points=number_of_data_points
+        )
 
 
 # web page that handles user query and displays model results
@@ -89,7 +120,7 @@ def go():
     return render_template(
         'go.html',
         query=query,
-        classification_result=classification_results
+        classification_result=classification_results,
     )
 
 

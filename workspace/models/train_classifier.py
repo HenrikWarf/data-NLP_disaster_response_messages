@@ -1,24 +1,80 @@
 import sys
+import pandas as pd
+import numpy as np
+import sqlite3
+from sqlalchemy import create_engine  
+from nltk.tokenize import word_tokenize
+import re 
+from nltk.corpus import stopwords
+from nltk.stem.porter import PorterStemmer
+from nltk.stem.wordnet import WordNetLemmatizer
+
+from sklearn.pipeline import Pipeline
+from sklearn.metrics import confusion_matrix
+from sklearn.model_selection import train_test_split
+from sklearn.multioutput import MultiOutputClassifier
+from sklearn.multiclass import OneVsRestClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
+from sklearn.metrics import classification_report
+from sklearn.model_selection import GridSearchCV
+from sklearn.svm import SVC
+import pickle
+import nltk
+nltk.download('stopwords')
 
 
 def load_data(database_filepath):
-    pass
+    engine = create_engine('sqlite:///' + database_filepath)
+    df = pd.read_sql('SELECT * FROM messages', engine)
+    X = df['message']
+    Y = df.iloc[:,4:]
+    category_names = list(y.columns)
+
+    return X, Y, category_names
 
 
 def tokenize(text):
-    pass
+        
+    #remove punctuation and make lower case
+    text = re.sub(r"[^a-zA-Z0-9]", " ", text.lower())
+    
+    #tokenize the text
+    words = word_tokenize(text)
+    
+    #remove stopwords
+    clean_words = []
+    for w in words:
+        if w not in stopwords.words("english"):
+            clean_words.append(w)
+    
+    lemmatizer = WordNetLemmatizer()
+    
+    words_final = []
+    for w in clean_words:
+        clean_tok = lemmatizer.lemmatize(w).strip()
+        words_final.append(clean_tok)
+    
+    return words_final
 
 
 def build_model():
-    pass
+    pipeline = Pipeline([
+        ('vect', CountVectorizer(tokenizer = tokenize)),
+        ('tfidf', TfidfTransformer()),
+        ('clf', MultiOutputClassifier(RandomForestClassifier()))
+    ])
+
+    return pipeline
 
 
 def evaluate_model(model, X_test, Y_test, category_names):
-    pass
+    Y_test_pred = model.predict(X_test)
+    print(classification_report(Y_test, Y_test_pred, target_names=category_names))
 
 
 def save_model(model, model_filepath):
-    pass
+    pickle.dump(model, open(model_filepath, 'wb'))
 
 
 def main():

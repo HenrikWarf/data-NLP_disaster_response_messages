@@ -26,6 +26,10 @@ body {
     border-bottom: 1px solid white;
 }
 
+.navbar-nav li a:focus {
+    background-color: transparent;
+}
+
 
 .jumbotron {
     /* padding-top: 100px ; */
@@ -129,9 +133,14 @@ input:focus {
     font-size: 20px;
 }
 
+.plot1 {
+    align-items: center;
+}
+
 footer {
+    margin-top: 100px;
     width: 100%;
-    background-color: rgb(252, 252, 252);
+    background-color: #D8DBE2;
     padding: 100px;
 }
 
